@@ -1,0 +1,32 @@
+============= Account management =============
+register: /snowflake/account/registration
+----------------------------
+Input:
+    {
+        "email": <String>,
+        "password": <String>,
+        "username": <String>
+    }
+Description: 
+    checks duplicate useremail and start registering
+    click register button -> call this
+Result: 
+    {
+        "status": 200
+    }
+    {
+        "status": 202,
+        "err_message": "duplicate email exists"
+    }
+    {
+        "status": 203,
+        "err_message": "duplicate username exists"
+    }
+----------------------------
+
+
+
+
+/snowflake/account/sendVeriCode
+
+
