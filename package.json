@@ -1,29 +1,61 @@
 {
-  "name": "snowflake-backend",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "start": "node bin/www",
-    "dev": "./node_modules/.bin/nodemon bin/www",
-    "prd": "pm2 start bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "dependencies": {
-    "debug": "^4.1.1",
-    "koa": "^2.7.0",
-    "koa-bodyparser": "^4.2.1",
-    "koa-convert": "^1.2.0",
-    "koa-json": "^2.0.2",
-    "koa-logger": "^3.2.0",
-    "koa-onerror": "^4.1.0",
-    "koa-router": "^7.4.0",
-    "koa-static": "^5.0.0",
-    "koa-views": "^6.2.0",
-    "pug": "^2.0.3"
-  },
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "nodemon": "^1.19.1"
-  }
+    "name": "snowflake-backend",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "start": "node bin/www",
+        "dev": "./node_modules/.bin/nodemon bin/www",
+        "prd": "pm2 start bin/www",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+        "assert": "^2.0.0",
+        "aws-sdk": "^2.480.0",
+        "babel-preset-env": "^1.7.0",
+        "babel-register": "^6.26.0",
+        "bcryptjs": "^2.4.3",
+        "chai": "^4.2.0",
+        "debug": "^4.1.1",
+        "jest": "^24.8.0",
+        "jsonwebtoken": "^8.5.1",
+        "koa": "^2.7.0",
+        "koa-bodyparser": "^4.2.1",
+        "koa-convert": "^1.2.0",
+        "koa-json": "^2.0.2",
+        "koa-logger": "^3.2.0",
+        "koa-onerror": "^4.1.0",
+        "koa-router": "^7.4.0",
+        "koa-static": "^5.0.0",
+        "koa-views": "^6.2.0",
+        "mocha": "^6.1.4",
+        "mysql2": "^1.6.5",
+        "nodemailer": "^6.2.1",
+        "pug": "^2.0.3",
+        "sequelize": "^5.8.9",
+        "supertest": "^4.0.2"
+    },
+    "devDependencies": {
+        "@babel/plugin-transform-modules-commonjs": "^7.5.0",
+        "eslint": "^6.0.0",
+        "eslint-config-standard": "^12.0.0",
+        "eslint-plugin-import": "^2.17.3",
+        "eslint-plugin-node": "^9.1.0",
+        "eslint-plugin-promise": "^4.1.1",
+        "eslint-plugin-standard": "^4.0.0",
+        "eslint-plugin-vue": "^5.2.2",
+        "nodemon": "^1.19.1"
+    },
+    "babel": {
+        "presets": [
+            [
+                "env",
+                {
+                    "targets": {
+                        "node": true
+                    }
+                }
+            ]
+        ]
+    }
 }

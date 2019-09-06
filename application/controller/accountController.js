@@ -2,7 +2,7 @@ const baseController = require("./baseController");
 const account = require("../model/account");
 const email_code = require("../model/email_code");
 
-class accountController extends BaseController {
+class accountController extends baseController  {
     async register(content) {
         // registration
         console.log("accountController.registration: ", content);

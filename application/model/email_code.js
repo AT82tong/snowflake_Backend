@@ -1,5 +1,5 @@
-import { email_code } from "./entity/email_code"
-import { users } from "./entity/users"
+import { email_code } from "./entity/email_code.js"
+import { users } from "./entity/users.js"
 
 const bcryptjs = require("bcryptjs");
 

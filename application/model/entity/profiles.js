@@ -24,7 +24,7 @@ const profiles = sequelize.define('profiles', {
         type: Sequelize.STRING,
     },
     class: {
-        type: sequelize.INTEGER.ZEROFILL,
+        type: Sequelize.INTEGER,
         allowNull: false
     }
 }, {

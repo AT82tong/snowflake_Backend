@@ -26,7 +26,7 @@ const users = sequelize.define('users', {
         allowNull: false
     },
     class: {
-        type: sequelize.INTEGER.ZEROFILL,
+        type: Sequelize.INTEGER,
         allowNull: false
     }
 }, {
