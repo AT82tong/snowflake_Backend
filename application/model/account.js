@@ -1,4 +1,4 @@
-import { users_dba } from "./entity/users"
+import { users } from "./entity/users"
 import { profiles } from "./entity/profiles"
 
 const bcryptjs = require("bcryptjs");
@@ -7,7 +7,7 @@ let jwt_key = require("../../config/dev").keys['jwt'];
 
 exports.checkEmail = async function (content) {
     let email = content.email;
-    let list = await users_dba.findAll({
+    let list = await users.findAll({
         where: {
             email: email
         }
@@ -21,7 +21,7 @@ exports.checkEmail = async function (content) {
 
 exports.checkUsername = async function (content) {
     let username = content.username;
-    let list = await users_dba.findAll({
+    let list = await users.findAll({
         where: {
             username: username
         }
@@ -43,7 +43,7 @@ exports.addUser = async function (content) {
     let encryp_password = bcryptjs.hashSync(raw_password, salt);
     console.log("encryp_password: ", encryp_password);
 
-    users_dba.bulkCreate([{
+    users.bulkCreate([{
         email: email,
         password: encryp_password,
         username: username,
@@ -78,4 +78,24 @@ exports.addUser = async function (content) {
         // uploadfile: uploadfileString,
         // favoritefile: favoritefileString
     }])
+}
+
+exports.upgradeClass = async function(content) {
+    let email = content.email;
+    await users.update({
+        class: 1
+    }, {
+        where: {
+            email: email
+        }
+    });
+
+    await profiles.update({
+        class: 1
+    }, {
+        where: {
+            email: email
+        }
+    });
+
 }

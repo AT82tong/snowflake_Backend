@@ -2,13 +2,13 @@ const baseController = require("./baseController");
 const account = require("../model/account");
 const email_code = require("../model/email_code");
 
-class accountController extends baseController  {
+class accountController extends baseController {
     async register(content) {
         // registration
         console.log("accountController.registration: ", content);
 
         let dupEmail = await account.checkEmail(content);
-        console.log("duplicates: ", duplicates);
+        console.log("dupEmail: ", dupEmail);
         // email 0
 
         // duplicate email
@@ -22,7 +22,7 @@ class accountController extends baseController  {
         }
 
         let dupUsername = await account.checkUsername(content);
-        console.log("duplicates: ", duplicates);
+        console.log("dupUsername: ", dupUsername);
         // email 0
 
         // duplicate email
@@ -86,7 +86,20 @@ class accountController extends baseController  {
         //      code: verification_code
         //      password: password
         // }
-        return email_code.checkCode(content);
+        if (await email_code.checkCode(content) == true) {
+            account.upgradeClass(content);
+            let response = {
+                "status": 200
+            }
+            return response;
+        }
+
+        let result = {
+            "status": 202,
+            "err_message": "The code entered is incorrect"
+        }
+        return result;
+
     }
 }
 module.exports = accountController;

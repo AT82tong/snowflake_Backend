@@ -8,8 +8,7 @@ Input:
         "username": <String>
     }
 Description: 
-    checks duplicate useremail and start registering
-    click register button -> call this
+    checks duplicate useremail/name and add to database, gives class=0 permission
 Result: 
     {
         "status": 200
@@ -24,9 +23,30 @@ Result:
     }
 ----------------------------
 
+Send Verification Code: /snowflake/account/sendVeriCode
+----------------------------
+Input:
+    {
+        "email": <String>
+    }
+Description:
+    send verification code to given email
+Result:
+    {
+        "status": 200
+    }
+----------------------------
 
-
-
-/snowflake/account/sendVeriCode
-
-
+Check Verification Code: /snowflake/account/checkVeriCode
+----------------------------
+Input:
+    {
+        "email": <String>
+    }
+Description:
+    check verification code to given account, set class=1 permission
+Result:
+    {
+        "status": 200
+    }
+----------------------------

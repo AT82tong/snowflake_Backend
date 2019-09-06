@@ -5,7 +5,7 @@ const bcryptjs = require("bcryptjs");
 
 let account = require("./account");
 
-exports.updateCode = async function(content) {
+exports.updateCode = async function (content) {
     let email = content.email;
     let code = content.code;
     await deleteOutDated();
@@ -54,7 +54,7 @@ exports.updateCode = async function(content) {
     return result;
 }
 
-exports.checkCode = async function(content) {
+exports.checkCode = async function (content) {
     let email = content.email;
     let code = content.code;
     let password = content.password;
@@ -109,22 +109,16 @@ exports.checkCode = async function(content) {
             //     "status": 200,
             //     "token": token
             // }
-            let result = {
-                "status": 200
-            }
-            return result;
+            console.log("Correct Code")
+            return true
         } else {
-            // code is wrong
-            let result = {
-                "status": 202,
-                "err_message": "The code entered is incorrect"
-            }
-            return result;
+            console.log("Incorrect Code")
+            return false
         }
     }
 }
 
-exports.deleteRow = async function(content) {
+exports.deleteRow = async function (content) {
     let email = content.email;
     await email_code.destroy({
         where: {
