@@ -15,7 +15,7 @@ class accountController extends baseController {
         if (dupEmail === 'email') {
             console.log("duplicate email");
             let result = {
-                "status": 202,
+                "status": 201,
                 "err_message": "duplicate email exists"
             }
             return result;
@@ -29,7 +29,7 @@ class accountController extends baseController {
         if (dupUsername === 'email') {
             console.log("duplicate username");
             let result = {
-                "status": 203,
+                "status": 202,
                 "err_message": "duplicate username exists"
             }
             return result;
@@ -95,11 +95,17 @@ class accountController extends baseController {
         }
 
         let result = {
-            "status": 202,
+            "status": 203,
             "err_message": "The code entered is incorrect"
         }
         return result;
 
+    }
+    
+    async login(content) {
+        // user login
+        let result = account.checkPassword(content)
+        return result;
     }
 }
 module.exports = accountController;

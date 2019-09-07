@@ -23,9 +23,21 @@ const profiles = sequelize.define('profiles', {
     description: {
         type: Sequelize.STRING,
     },
+    defaulticon: {
+        type: Sequelize.INTEGER
+    },
     class: {
         type: Sequelize.INTEGER,
         allowNull: false
+    },
+    posted: {
+        type: Sequelize.STRING
+    },
+    requested: {
+        type: Sequelize.STRING
+    },
+    preferredname: {
+        type: Sequelize.STRING
     }
 }, {
     freezeTableName: true

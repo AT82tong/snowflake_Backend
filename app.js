@@ -36,19 +36,20 @@ app.use(async(ctx, next) => {
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 
+// register + send vericode + check vericode
 const user_reg = require('./routes/user_register');
 app.use(user_reg.routes(), user_reg.allowedMethods());
-// const user_email_veri = require('./routes/user_email_veri');
-// app.use(user_email_veri.routes(), user_email_veri.allowedMethods());
-// const user_code_veri = require('./routes/user_code_veri');
-// app.use(user_code_veri.routes(), user_code_veri.allowedMethods());
-// const user_login = require('./routes/user_login');
-// app.use(user_login.routes(), user_login.allowedMethods());
 
-// const profile_view = require('./routes/profile_view');
-// app.use(profile_view.routes(), profile_view.allowedMethods());
-// const profile_edit = require('./routes/profile_edit');
-// app.use(profile_edit.routes(), profile_edit.allowedMethods());
+// login
+const user_login = require('./routes/user_login');
+app.use(user_login.routes(), user_login.allowedMethods());
+
+// profile view and edit
+const profile_view = require('./routes/profile_view');
+app.use(profile_view.routes(), profile_view.allowedMethods());
+
+const profile_edit = require('./routes/profile_edit');
+app.use(profile_edit.routes(), profile_edit.allowedMethods());
 
 // const file_list = require('./routes/file_listAll');
 // app.use(file_list.routes(), file_list.allowedMethods());

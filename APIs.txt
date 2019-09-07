@@ -1,36 +1,36 @@
 ============= Account management =============
 register: /snowflake/account/registration
 ----------------------------
+Description: 
+    checks duplicate useremail/name and add to database, gives class=0 permission
 Input:
     {
         "email": <String>,
         "password": <String>,
         "username": <String>
     }
-Description: 
-    checks duplicate useremail/name and add to database, gives class=0 permission
 Result: 
     {
         "status": 200
     }
     {
-        "status": 202,
+        "status": 201,
         "err_message": "duplicate email exists"
     }
     {
-        "status": 203,
+        "status": 202,
         "err_message": "duplicate username exists"
     }
 ----------------------------
 
 Send Verification Code: /snowflake/account/sendVeriCode
 ----------------------------
+Description:
+    send verification code to given email
 Input:
     {
         "email": <String>
     }
-Description:
-    send verification code to given email
 Result:
     {
         "status": 200
@@ -39,14 +39,80 @@ Result:
 
 Check Verification Code: /snowflake/account/checkVeriCode
 ----------------------------
+Description:
+    check verification code to given account, set class=1 permission
 Input:
     {
         "email": <String>
     }
-Description:
-    check verification code to given account, set class=1 permission
 Result:
     {
         "status": 200
     }
+    {
+        "status": 203,
+        "err_message": "The code entered is incorrect"
+    }
+
 ----------------------------
+
+Login: /snowflake/account/login
+----------------------------
+Description:
+    check if useremail matches with password, if yes, give auth token(used to ensure only authorized person can do certain functionalities)
+Input:
+    {
+        "email": <String>,
+        "password": <String>
+    }
+Result:
+    {
+        "status": 200,
+        "token": token
+    }
+    {
+        "status": 204,
+        "err_message": "email does not exist"
+    }
+    {
+        "status": 205,
+        "err_message": "incorrect password"
+    }
+
+
+----------------------------
+Edit Profile: 
+/snowflake/profile/editAll (Tested, others havn't been tested yet)
+/snowflake/profile/editDefaulticon
+/snowflake/profile/editDescription
+/snowflake/profile/editUsername
+/snowflake/profile/editPreferredname
+----------------------------
+Description:
+    edit corresponding fields in profiles, requires auth tokens(obtained from login)
+Input (for editAll):
+    {
+        "username": <String>,
+	    "defaulticon": <Integer>,
+	    "description": <String>,
+	    "preferredname": <String>
+    }
+Result:
+    {
+        "status": 200
+    }
+    {
+        "status": 206,
+        "err_message": "username exists"
+    }
+
+
+
+
+
+
+============= Post management =============
+
+
+============= Request management =============
+============= ??? management =============
