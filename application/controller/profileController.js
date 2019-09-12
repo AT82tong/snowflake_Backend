@@ -11,7 +11,7 @@ class profileController extends baseController {
                 "status": 209,
                 "err_message": "empty useremail"
             }
-            return 
+            return result
         }
         let result = await userProfile.getProfile(content);
         // let comments = await comment_list.get_comment_byuser(content);

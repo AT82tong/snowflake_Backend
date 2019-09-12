@@ -3,7 +3,7 @@ import { users } from "./entity/users";
 // import { files } from "./entity/files"
 // import { comment_list } from "./entity/comment_list"
 
-// const filesjs = require("../model/files");
+const post = require("../model/post");
 
 var Sequelize = require('sequelize');
 let Op = Sequelize.Op;
@@ -58,6 +58,16 @@ exports.getDefaulticon = async function (content) {
     return profile.defaulticon;
 }
 
+exports.getPosted = async function (content) {
+    let email = content.email;
+    let profile = await profiles.findOne({
+        where: {
+            email: email
+        }
+    });
+    return profile.posted;
+}
+
 exports.getProfile = async function (content) {
     let email = content.email;
     let profile = await profiles.findOne({
@@ -79,9 +89,23 @@ exports.getProfile = async function (content) {
     let defaulticon = profile.defaulticon;
     let preferredname = profile.preferredname;
     let cclass = profile.class;
-    // let filesString = profile.uploadfile;
-    // let filesJSON = JSON.parse(filesString);
-    // let files = filesJSON.content;
+    let postedString = profile.posted;
+    let posteds = postedString.split(/[^0-9]/).map(Number);
+    posteds = posteds.filter(Boolean);
+
+    console.log("list: ", posteds);
+
+    var postedDetails = [];
+    var posted;
+    for (posted of posteds) {
+        let current_post = await post.getPost(posted)
+        let postJSON = current_post
+        postJSON["uid"] = posted
+
+        postedDetails.push(postJSON)
+
+    }
+    console.log("posteddetail: ", postedDetails)
     // let favoriteJSON = JSON.parse(profile.favoritefile);
     // let favorite = favoriteJSON.content;
 
@@ -94,7 +118,8 @@ exports.getProfile = async function (content) {
         "description": description,
         "defaulticon": defaulticon,
         "preferredname": preferredname,
-        "class": cclass
+        "class": cclass,
+        "posted": postedDetails
         // "files": files,
         // "favorite": favorite,
         // "comments": comments.content
@@ -182,21 +207,47 @@ exports.getProfile = async function (content) {
 //     })
 // }
 
-// exports.setfavoritefile = async function(content) {
-//     let email = content.email;
-//     let favoritefile = content.favoritefile;
-//     console.log("======= user_profile.setfavoritefile =========");
-//     console.log("email: ", email);
-//     console.log("favoritefile: ", favoritefile);
-//     // await setTimeout(function() {}, 100, 'funky');
-//     await user_profile.update({
-//         favoritefile: favoritefile
-//     }, {
-//         where: {
-//             email: email
-//         }
-//     })
-// }
+exports.editpostlist = async function (email, uid, add, type) {
+
+    if (add === 1 && type === 0) {
+        let profile = await profiles.findOne({
+            where: {
+                email: email
+            }
+        })
+        let posts = profile.posted
+        let thelist = posts.split(/[^0-9]/).map(Number);
+        thelist = thelist.filter(Boolean);
+
+        if (thelist.includes(uid) === true) {
+            let result = {
+                "status": 208,
+                "err_message": "Post has been posted"
+            }
+            return result;
+        }
+
+        thelist.push(uid)
+
+        let postedJSON = {content: thelist};
+        let postedString = JSON.stringify(postedJSON)
+        profiles.update({
+            posted: postedString
+        }, {
+            where: {
+                email: email
+            }
+        })
+        
+        let result = {
+            "status": 200
+        }
+
+        return result
+    }
+
+    
+}
 
 exports.editUsername = async function (content) {
     let email = content.email;

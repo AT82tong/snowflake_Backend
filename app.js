@@ -51,6 +51,10 @@ app.use(profile_view.routes(), profile_view.allowedMethods());
 const profile_edit = require('./routes/profile_edit');
 app.use(profile_edit.routes(), profile_edit.allowedMethods());
 
+// create new post and edit
+const post_mgmt = require('./routes/post_mgmt');
+app.use(post_mgmt.routes(), post_mgmt.allowedMethods());
+
 // const file_list = require('./routes/file_listAll');
 // app.use(file_list.routes(), file_list.allowedMethods());
 // const file_getSignedURL = require('./routes/file_getSignedURL');

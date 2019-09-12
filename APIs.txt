@@ -79,6 +79,61 @@ Result:
         "err_message": "incorrect password"
     }
 
+----------------------------
+View Profile: 
+/snowflake/profile/viewAll (Tested, others havn't been tested yet)
+/snowflake/profile/viewDefaulticon
+/snowflake/profile/viewDescription
+/snowflake/profile/viewUsername
+/snowflake/profile/viewPreferredname
+----------------------------
+Description:
+    view corresponding fields in profiles
+Input (for editAll):
+    {
+        "email": <String>
+    }
+Result:
+    {
+        "status": 200
+        "username": "AT",
+        "email": "an82@purdue.edu",
+        "description": "",
+        "defaulticon": 0,
+        "preferredname": null,
+        "class": 0,
+        "posted": [
+        {
+            "publisherEmail": "an82@purdue.edu",
+            "serviceTitle": "Title10",
+            "createdTime": null,
+            "price": 12.34,
+            "description": "AT LOVE KENNY!!!!!!",
+            "buyers": "{\"content\":[]}",
+            "uid": 12
+        },
+        {
+            "publisherEmail": "an82@purdue.edu",
+            "serviceTitle": "Title11",
+            "createdTime": null,
+            "price": 12.34,
+            "description": "AT LOVE KENNY!!!!!!",
+            "buyers": "{\"content\":[]}",
+            "uid": 13
+        }
+        ]
+    }
+    {
+        "status": 209,
+        "err_message": "empty useremail"
+    }
+    {
+        "status": 210,
+        "err_message": "cannot find corresponding account by email"
+    }
+
+
+
 
 ----------------------------
 Edit Profile: 
@@ -107,11 +162,58 @@ Result:
     }
 
 
-
-
-
-
 ============= Post management =============
+Post new: 
+/snowflake/post/createPost 
+----------------------------
+Description:
+    Create a new post and save into posted list in profile
+Input:
+    {
+        "publisherEmail": <String>,
+	    "serviceTitle": <String>,
+	    "description": <String>,
+	    "price": <Double(8,2)>
+    }
+Result:
+    {
+        "status": 200
+    }
+    {
+        "status": 207,
+        "err_message": "duplicate title exists"
+    }
+    {
+        "status": 208,
+        "err_message": "Post has been posted"
+    }
+
+
+----------------------------
+view post: 
+/snowflake/post/viewPost 
+----------------------------
+Description:
+    Create a new post and save into posted list in profile
+Input:
+    {
+        "publisherEmail": <String>,
+	    "serviceTitle": <String>,
+	    "description": <String>,
+	    "price": <Double(8,2)>
+    }
+Result:
+    {
+        "status": 200
+    }
+    {
+        "status": 207,
+        "err_message": "duplicate title exists"
+    }
+    {
+        "status": 208,
+        "err_message": "Post has been posted"
+    }
 
 
 ============= Request management =============
