@@ -197,22 +197,25 @@ Description:
     Create a new post and save into posted list in profile
 Input:
     {
-        "publisherEmail": <String>,
-	    "serviceTitle": <String>,
-	    "description": <String>,
-	    "price": <Double(8,2)>
+        "uid" : <Integer>
     }
 Result:
     {
-        "status": 200
+        "status": 200,
+        "publisherEmail": "an82@purdue.edu",
+        "serviceTitle": "Title5",
+        "createdTime": null,
+        "price": 12.34,
+        "description": "AT LOVE KENNY!!!!!!",
+        "buyers": "{\"content\":[]}"
     }
     {
-        "status": 207,
-        "err_message": "duplicate title exists"
+        "status": 211,
+        "err_message": "empty uid"
     }
     {
-        "status": 208,
-        "err_message": "Post has been posted"
+        "status": 212,
+       "err_message": "can't find post information by given uid"
     }
 
 
